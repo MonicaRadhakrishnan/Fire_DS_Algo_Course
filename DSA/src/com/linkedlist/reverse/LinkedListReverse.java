@@ -1,7 +1,7 @@
-package com.linkedlist.insertByIndex;
+package com.linkedlist.reverse;
 
 
-public class LinkedListInsertByIndex {
+public class LinkedListReverse {
     private Node head;
     private Node tail;
     private int length;
@@ -12,7 +12,7 @@ public class LinkedListInsertByIndex {
             this.value = value;
         }
     }
-    public LinkedListInsertByIndex(int value){
+    public LinkedListReverse(int value){
         Node newNode = new Node(value);
         head = newNode;
         tail = newNode;
@@ -126,5 +126,29 @@ public class LinkedListInsertByIndex {
         temp.next = newNode;
         length++;
         return true;
+    }
+    public Node removeByIndex(int index){
+        if(index < 0 || index >= length) return null;
+        if(index == 0) return removeFirst();
+        if(index == length -1) return removeLast();
+        Node prev = getByIndex(index -1);
+        Node temp = prev.next;
+        prev.next = temp.next;
+        temp.next = null;
+        length--;
+        return temp;
+    }
+    public void reverse(){
+        Node temp =head;
+        head = tail;
+        tail = temp;
+        Node next = temp.next;
+        Node before =null;
+        for(int i = 0; i < length ;i++){
+            Node after = temp.next;
+            temp.next = before;
+            before = temp;
+            temp = after;
+        }
     }
 }
